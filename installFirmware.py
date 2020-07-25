@@ -7,12 +7,12 @@ import tempfile
 import os
 import wget
 
-linkFirmware = 'http://micropython.org/resources/firmware/esp32-idf3-20191220-v1.12.bin'
+linkFirmware = 'http://micropython.org/resources/firmware/esp32-idf3-20200725-unstable-v1.12-657-g37e1b5c89.bin'
 serialPort = 'COM3'
 
 temp = tempfile.gettempdir()
-wget.download(url=linkFirmware,
-              out=temp + '/esp32Firmware.bin')
+print(wget.download(url=linkFirmware,
+                    out=temp + '/esp32Firmware.bin'))
 
 print(os.system(f'python -m esptool --port {serialPort} erase_flash', ))
 print(os.system(
