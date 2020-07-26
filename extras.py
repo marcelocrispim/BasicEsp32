@@ -1,6 +1,7 @@
-from json import loads
+from json import loads, dumps
 
 import network
+import urequests
 import usocket as socket
 import ustruct as struct
 from machine import RTC
@@ -11,7 +12,6 @@ from utime import sleep_ms, localtime
 def npt_br():
     NTP_DELTA = 3155673600 + (60 * 60 * 3)  # fuso de sao paulo
     host = "pool.ntp.br"
-
     NTP_QUERY = bytearray(48)
     NTP_QUERY[0] = 0x1b
     addr = socket.getaddrinfo(host, 123)[0][-1]
@@ -48,3 +48,16 @@ def conecta():
                 sleep_ms(100)
             sleep_ms(500)
             break
+
+
+class post(object):
+    def __init__(self,
+                 url='http://httpbin.org/post',
+                 headers={'content-type': 'application/json'}):
+        self.url = url
+        self.headers = headers
+
+    def __call__(self, *args, **kwargs):
+        return urequests.post(url=self.url,
+                              headers=self.headers,
+                              data=dumps(kwargs)).json()
