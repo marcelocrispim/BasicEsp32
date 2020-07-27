@@ -84,4 +84,4 @@ class UdpClient(object):
         self.mac = ubinascii.hexlify(network.WLAN().config('mac'), ':').decode()
 
     def __call__(self, *args, **kwargs):
-        return self.udp.sendto(dumps({'Device': self.mac}.update(kwargs)), self.serverAddress)
+        return self.udp.sendto(dumps({'Device': self.mac}.update(kwargs)).encode('utf-8'), self.serverAddress)
