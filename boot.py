@@ -4,7 +4,7 @@
 # import webrepl
 # webrepl.start()
 
-from extras import *
+from extras import conecta, npt_br
 
 conecta()
 

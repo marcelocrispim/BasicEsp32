@@ -7,6 +7,7 @@ import ustruct as struct
 from machine import RTC
 from network import WLAN
 from utime import sleep_ms, localtime
+import ubinascii
 
 
 def npt_br():
@@ -50,7 +51,7 @@ def conecta():
             break
 
 
-class post(object):
+class Post(object):
     def __init__(self,
                  url='http://httpbin.org/post',
                  headers={'content-type': 'application/json'}):
@@ -61,3 +62,26 @@ class post(object):
         return urequests.post(url=self.url,
                               headers=self.headers,
                               data=dumps(kwargs)).json()
+
+
+class UdpServer(object):
+    def __init__(self, host='', port=5555, size=64):
+        self.udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self.server = (host, port)
+        self.udp.bind(self.server)
+        self.size = size
+
+    def __call__(self, *args, **kwargs):
+        self.data, self.address = self.udp.recvfrom(self.size)
+        self.data = loads(self.data.decode())
+        return self.data, self.address
+
+
+class UdpClient(object):
+    def __init__(self, host='192.168.30.253', port=6666):
+        self.udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self.serverAddress = (host, port)
+        self.mac = ubinascii.hexlify(network.WLAN().config('mac'), ':').decode()
+
+    def __call__(self, *args, **kwargs):
+        return self.udp.sendto(dumps({'Device': self.mac}.update(kwargs)), self.serverAddress)
