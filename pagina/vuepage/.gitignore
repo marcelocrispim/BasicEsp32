@@ -1,11 +1,6 @@
-.idea/*
-.idea
-testes
-testes/teste.py
-lista.json
-pagina/vuepage/.DS_Store
-pagina/vuepage/node_modules
-pagina/vuepage//dist
+.DS_Store
+node_modules
+/dist
 
 # local env files
 .env.local

@@ -6,6 +6,6 @@
 
 from extras import conecta, npt_br
 
-conecta()
+# conecta()
 
 npt_br()
