@@ -1,2 +1,4 @@
 esptool==2.8
 wget==3.2
+
+sanic~=20.6.3

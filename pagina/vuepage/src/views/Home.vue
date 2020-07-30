@@ -1,18 +1,27 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div class="home">
+        <img :src=img[n] width="400">
+    </div>
 </template>
 
 <script>
-  // @ is an alias to /src
-  import HelloWorld from '@/components/HelloWorld.vue'
 
-  export default {
-    name: 'Home',
-    components: {
-      HelloWorld
+    export default {
+        name: 'Home',
+        data() {
+            return {
+                img: ['/static/img/ledy1_m.jpg', '/static/img/ledy2_m.jpg', '/static/img/ledy_m.jpg'],
+                n: 1
+            }
+        },
+        methods: {},
+        created() {
+            setInterval(() => {
+                this.n = this.n + 1
+                if (this.n > 2) {
+                    this.n = 0
+                }
+            }, 1500)
+        }
     }
-  }
 </script>
