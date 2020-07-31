@@ -66,7 +66,8 @@
             led4: {type: Boolean, default: false},
             led5: {type: Boolean, default: false},
             led6: {type: Boolean, default: false}
-        }
+        },
+
     }
 </script>
 

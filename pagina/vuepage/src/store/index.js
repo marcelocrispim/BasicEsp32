@@ -12,11 +12,20 @@ export default new Vuex.Store({
         l5: false,
         l6: false
     },
+    getters: {
+        l1: state => state.l1,
+        l2: state => state.l2,
+        l3: state => state.l3,
+        l4: state => state.l4,
+        l5: state => state.l5,
+        l6: state => state.l6,
+
+    },
     mutations: {
         "SOCKET_event"(state, message) {
             console.log('mutations ', message)
-            state.l3 = message.l3
-            state.l4 = message.l3
+            state.l3 = message.bt1
+            state.l4 = message.bt1
             // do something
         }
     },
