@@ -10,7 +10,8 @@ export default new Vuex.Store({
         l3: false,
         l4: false,
         l5: false,
-        l6: false
+        l6: false,
+        ad1: 0
     },
     getters: {
         l1: state => state.l1,
@@ -19,6 +20,7 @@ export default new Vuex.Store({
         l4: state => state.l4,
         l5: state => state.l5,
         l6: state => state.l6,
+        ad1: state => (Number(state.ad1) * 4).toString() + ' V'
 
     },
     mutations: {
@@ -26,6 +28,7 @@ export default new Vuex.Store({
             console.log('mutations ', message)
             state.l3 = message.bt1
             state.l4 = message.bt1
+            state.ad1 = message.ad1
             // do something
         }
     },

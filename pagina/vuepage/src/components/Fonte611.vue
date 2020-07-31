@@ -2,6 +2,48 @@
     <div id="pai">
         <table>
             <tr>
+                <td colspan="2">
+                    P600
+                </td>
+
+                <td colspan="2">
+                    {{p600}}
+                </td>
+
+            </tr>
+            <tr>
+                <td colspan="2">
+                    15V
+                </td>
+
+                <td colspan="2">
+                    {{v15}}
+                </td>
+
+            </tr>
+            <tr>
+                <td colspan="2">
+                    5V
+                </td>
+
+                <td colspan="2">
+                    {{v5}}
+                </td>
+
+            </tr>
+            <tr>
+                <td colspan="4">
+
+                </td>
+
+            </tr>
+            <tr>
+                <td colspan="4">
+
+                </td>
+
+            </tr>
+            <tr>
                 <td>
                     Spp
                 </td>
@@ -65,7 +107,10 @@
             led3: {type: Boolean, default: false},
             led4: {type: Boolean, default: false},
             led5: {type: Boolean, default: false},
-            led6: {type: Boolean, default: false}
+            led6: {type: Boolean, default: false},
+            p600: {type: String, default: '600V'},
+            v15: {type: String, default: '15V'},
+            v5: {type: String, default: '5V'},
         },
 
     }
@@ -74,7 +119,7 @@
 <style scoped>
     #pai {
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-        font-size: x-large;
+        font-size: large;
         font-weight: lighter;
         background-color: azure;
         width: fit-content;
@@ -95,7 +140,7 @@
     }
 
     td {
-        border: 1px solid lightgray;
+        border: 1px solid antiquewhite;
         padding: 3px;
     }
 

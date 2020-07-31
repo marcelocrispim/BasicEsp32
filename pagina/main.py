@@ -3,8 +3,10 @@ from sanic import Sanic
 from sanic.response import file
 import asyncio
 from json import loads
+import logging
 
-sio = socketio.AsyncServer(async_mode='sanic')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s:%(message)s')
+sio = socketio.AsyncServer(async_mode='sanic', cors_allowed_origins='*')
 app = Sanic(__name__)
 sio.attach(app)
 
@@ -22,7 +24,7 @@ class EchoServerProtocol:
 
 
 async def mainUdp(q):
-    print("Starting UDP server")
+    logging.info("Starting UDP server")
     loop = asyncio.get_running_loop()
     transport, protocol = await loop.create_datagram_endpoint(
         lambda: EchoServerProtocol(q),
@@ -31,14 +33,20 @@ async def mainUdp(q):
     try:
         while True:
             await asyncio.sleep(3600)  # Serve for 1 hour.
-    finally:
+    except Exception as e:
+        logging.error('UDP error' + e.__str__())
         transport.close()
 
 
 async def background_task(q):
+    logging.info('Starting BackGround Task')
     while True:
-        msg = loads(await q.get())
-        await sio.emit('event', msg['data'])
+        try:
+            msg = loads(await q.get())
+            await sio.emit('event', msg['data'])
+        except Exception as e:
+            logging.error('Queue error ' + e.__str__())
+            pass
 
 
 @app.listener('before_server_start')
@@ -59,4 +67,4 @@ app.add_route(index, '/')
 app.add_route(index, '/about')
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=8000)
+    app.run(host="0.0.0.0", port=8000, )
