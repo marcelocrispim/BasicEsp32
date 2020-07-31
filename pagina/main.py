@@ -1,8 +1,9 @@
-from sanic import Sanic
-from sanic.response import json, file
 import socketio
+from sanic import Sanic
+from sanic.response import file
 
 sio = socketio.AsyncServer(async_mode='sanic')
+
 app = Sanic(__name__)
 sio.attach(app)
 
@@ -13,7 +14,7 @@ async def background_task():
     while True:
         await sio.sleep(10)
         count = not count
-        await sio.emit('event', {'data': count})
+        await sio.emit('event', {'l3': count})
 
 
 @app.listener('before_server_start')

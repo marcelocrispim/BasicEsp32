@@ -89,7 +89,7 @@
         height: 30px;
         border-radius: 15px;
         opacity: .1;
-        transition: 400ms opacity;
+        transition: 200ms opacity;
         margin: 3px;
     }
 
@@ -124,6 +124,6 @@
 
     .ligado {
         opacity: 1;
-        transition: 400ms opacity;
+        transition: 200ms opacity;
     }
 </style>

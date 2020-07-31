@@ -1,4 +1,4 @@
 esptool==2.8
 wget==3.2
-
+python-socketio~=4.6.0
 sanic~=20.6.3

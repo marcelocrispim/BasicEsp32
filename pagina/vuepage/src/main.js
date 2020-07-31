@@ -5,18 +5,20 @@ import store from './store'
 import VueSocketIO from 'vue-socket.io'
 import SocketIO from "socket.io-client"
 
+
+const options = {path: '/socket.io'}; //Options object to pass into SocketIO
 Vue.use(new VueSocketIO({
-    debug: true,
-    connection: 'http://127.0.0.1:8000',
+    debug: false,
+    connection: SocketIO('http://127.0.0.1:8000', options),
     vuex: {
         store,
         actionPrefix: 'SOCKET_',
         mutationPrefix: 'SOCKET_'
     },
-    options: {path: "/my-app/"} //Optional options
+
 }))
 
-Vue.config.productionTip = false
+Vue.config.productionTip = true
 
 
 new Vue({

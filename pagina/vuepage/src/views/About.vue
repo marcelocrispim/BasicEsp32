@@ -11,8 +11,8 @@
 </template>
 <script>
 
-    import Fonte611 from "../components/Fonte611";
-    import io from 'socket.io-client';
+    import Fonte611 from "../components/Fonte611"
+    import {mapState} from 'vuex'
 
     export default {
         name: 'About',
@@ -21,36 +21,22 @@
 
         },
         data() {
-            return {
-                l1: false,
-                l2: false,
-                l3: true,
-                l4: false,
-                l5: false,
-                l6: false,
-            }
+            return {}
 
         },
-        methods: {
-            update: () => {
-                const socket = io('http://127.0.0.1:8000');
-                socket.on('connect', () => {
-                    console.log('socket io conectado')
-
-                })
-                socket.on('disconnect', () => {
-                    console.log('socket io desconectado')
-                })
-                socket.on('event', (res) => {
-                    console.log('dado = ', res.data, ' ', typeof res.data)
-
-                    $.data.l3 = res.data
-                });
-
-            }
+        computed: {
+            ...mapState({
+                l1: state => state.l1,
+                l2: state => state.l2,
+                l3: state => state.l3,
+                l4: state => state.l4,
+                l5: state => state.l5,
+                l6: state => state.l6
+            })
         },
+        methods: {},
         mounted() {
-            this.update()
+
         }
 
     }

@@ -13,12 +13,16 @@ export default new Vuex.Store({
         l6: false
     },
     mutations: {
-        "SOCKET_event"() {
+        "SOCKET_event"(state, message) {
+            console.log('mutations ', message)
+            state.l3 = message.l3
+            state.l4 = message.l3
             // do something
         }
     },
     actions: {
-        "SOCKET_event"() {
+        "SOCKET_event"(context, message) {
+            console.log('actions ', message)
             // do something
         }
     },
