@@ -31,11 +31,11 @@
     }
 
     .fieldMaster {
-        margin: 0vh 4vw;
+        margin: 0 4vw;
     }
 
     .fieldSon {
-        margin: 0vh 0vw;
+        margin: 0 0;
         width: 8.5vw;
         height: 5vh;
     }
