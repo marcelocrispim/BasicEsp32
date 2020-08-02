@@ -1,10 +1,10 @@
 <template>
     <div id="app">
-        <container titulo="Estação 1"/>
+        <container titulo="Estação 1" cor="bordaVerde"/>
         <container titulo="Estação 2"/>
-        <container titulo="Estação 3"/>
+        <container titulo="Estação 3" cor="bordaVerde"/>
         <container titulo="Estação 4"/>
-        <container titulo="Estação 5"/>
+        <container titulo="Estação 5" cor="bordaVermelha"/>
     </div>
 </template>
 <script>
@@ -21,7 +21,8 @@
 </script>
 <style lang="scss">
     #app {
-        background-color: aliceblue;
+        background-color: gainsboro;
         display: flex;
+        margin: 0;
     }
 </style>

@@ -4,12 +4,17 @@ import router from './router'
 import store from './store'
 import VueSocketIO from 'vue-socket.io'
 import SocketIO from "socket.io-client"
+import {BootstrapVue, IconsPlugin} from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+Vue.use(BootstrapVue)
 
+Vue.use(IconsPlugin)
 const options = {path: '/socket.io'}; //Options object to pass into SocketIO
 Vue.use(new VueSocketIO({
     debug: false,
-    connection: SocketIO('http://192.168.30.43:8000', options),
+    connection: SocketIO('http://localhost:8000', options),
     vuex: {
         store,
         actionPrefix: 'SOCKET_',
