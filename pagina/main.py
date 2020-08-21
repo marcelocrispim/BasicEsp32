@@ -20,6 +20,7 @@ class EchoServerProtocol:
 
     def datagram_received(self, data, addr):
         message = data.decode()
+        print('msg ', message)
         self.q.put_nowait(message)
 
 
@@ -40,10 +41,23 @@ async def mainUdp(q):
 
 async def background_task(q):
     logging.info('Starting BackGround Task')
+    d = {
+        'id': 0,
+        'titulo': 'estação 1',
+        'cor': 'bordaVerde',
+        'show': True,
+        'tempo': '00:02',
+        'ligado': True,
+        'temperatura': 25
+    }
     while True:
         try:
-            msg = loads(await q.get())
-            await sio.emit('event', msg['data'])
+            try:
+                msg = loads(await asyncio.wait_for(q.get(), timeout=5))
+                await sio.emit('event', msg['data'])
+            except asyncio.TimeoutError:
+                logging.error('Timeout ERROR')
+
         except Exception as e:
             logging.error('Queue error ' + e.__str__())
             pass

@@ -1,42 +1,34 @@
 <template>
     <div class="corpoDisplayField">
-        <div class="linhaUp linha">
-            <div class="fieldMaster">600V</div>
-        </div>
-        <div class="linhaDown linha">
-            <div class="fieldSon">596Vmin</div>
-            <div class="fieldSon">602Vmax</div>
-        </div>
+
+        <b-icon icon="gear-wide" animation="spin" font-scale="1" shift-v="0"/>
+        {{principal.toLocaleTimeString()}}
+
+
     </div>
 </template>
 
 <script>
     export default {
-        name: "DisplayField"
+        name: "DisplayField",
+        props: {
+            principal: {type: Date, default: new Date()},
+
+        }
     }
 </script>
 
 <style scoped>
+
+
     .corpoDisplayField {
+        align-self: center;
+        font-size: large;
         margin: 1vh 0.8vw;
-
+        padding: 1.5vh 0;
+        background-color: #6393f6;
+        border-radius: 3px;
     }
 
-    .linha {
-        height: 2.5vh;
-    }
 
-    .linhaDown {
-        display: flex;
-    }
-
-    .fieldMaster {
-        margin: 0 4vw;
-    }
-
-    .fieldSon {
-        margin: 0 0;
-        width: 8.5vw;
-        height: 5vh;
-    }
 </style>

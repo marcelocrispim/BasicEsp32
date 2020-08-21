@@ -1,100 +1,73 @@
 <template>
-    <div id="pai">
-        <table>
-            <tr>
-                <td colspan="2">
-                    P600
-                </td>
+    <div id="vovo">
+        <div id="pai">
+            <table>
 
-                <td colspan="2">
-                    {{p600}}
-                </td>
+                <tr>
+                    <td colspan="4">
 
-            </tr>
-            <tr>
-                <td colspan="2">
-                    15V
-                </td>
+                    </td>
 
-                <td colspan="2">
-                    {{v15}}
-                </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
 
-            </tr>
-            <tr>
-                <td colspan="2">
-                    5V
-                </td>
+                    </td>
 
-                <td colspan="2">
-                    {{v5}}
-                </td>
-
-            </tr>
-            <tr>
-                <td colspan="4">
-
-                </td>
-
-            </tr>
-            <tr>
-                <td colspan="4">
-
-                </td>
-
-            </tr>
-            <tr>
-                <td>
-                    Spp
-                </td>
-                <td>
-                    <div class="ledLinha">
-                        <div class="leds" id="l1" v-bind:class="{ ligado: led1 }"></div>
-                        <div class="leds" id="l2" v-bind:class="{ ligado: led2 }"></div>
-                    </div>
-                </td>
-                <td>
-                    5V
-                </td>
-                <td>
-                    FAULT
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Ext
-                </td>
-                <td>
-                    <div class="ledLinha">
-                        <div class="leds" id="l3" v-bind:class="{ ligado: led3 }"></div>
-                        <div class="leds" id="l4" v-bind:class="{ ligado: led4 }"></div>
-                    </div>
-                </td>
-                <td>
-                    Unit
-                </td>
-                <td>
-                    ENABLE
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    FF
-                </td>
-                <td>
-                    <div class="ledLinha">
-                        <div class="leds" id="l5" v-bind:class="{ ligado: led5 }"></div>
-                        <div class="leds" id="l6" v-bind:class="{ ligado: led6 }"></div>
-                    </div>
-                </td>
-                <td>
-                    Uzk
-                </td>
-                <td>
-                    FAULT
-                </td>
-            </tr>
-        </table>
+                </tr>
+                <tr>
+                    <td>
+                        Spp
+                    </td>
+                    <td>
+                        <div class="ledLinha">
+                            <div class="leds" id="l1" v-bind:class="{ ligado: led1 }"></div>
+                            <div class="leds" id="l2" v-bind:class="{ ligado: led2 }"></div>
+                        </div>
+                    </td>
+                    <td>
+                        5V
+                    </td>
+                    <td>
+                        FAULT
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Ext
+                    </td>
+                    <td>
+                        <div class="ledLinha">
+                            <div class="leds" id="l3" v-bind:class="{ ligado: led3 }"></div>
+                            <div class="leds" id="l4" v-bind:class="{ ligado: led4 }"></div>
+                        </div>
+                    </td>
+                    <td>
+                        Unit
+                    </td>
+                    <td>
+                        ENABLE
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        FF
+                    </td>
+                    <td>
+                        <div class="ledLinha">
+                            <div class="leds" id="l5" v-bind:class="{ ligado: led5 }"></div>
+                            <div class="leds" id="l6" v-bind:class="{ ligado: led6 }"></div>
+                        </div>
+                    </td>
+                    <td>
+                        Uzk
+                    </td>
+                    <td>
+                        FAULT
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 </template>
 
@@ -117,9 +90,19 @@
 </script>
 
 <style scoped>
+    td {
+        border: solid yellow 1px;
+    }
+
+    #vovo {
+        align-items: center;
+        border: solid red 1px;
+    }
+
     #pai {
+
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-        font-size: large;
+        font-size: small;
         font-weight: lighter;
         background-color: azure;
         width: fit-content;
