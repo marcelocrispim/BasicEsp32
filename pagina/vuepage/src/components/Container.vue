@@ -86,7 +86,7 @@
         width: 16.5vw;
         text-align: center;
         border-radius: 5px;
-        transition: 1000ms;
+        transition: 2000ms;
         padding: 5px;
     }
 

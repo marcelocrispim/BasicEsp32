@@ -4,10 +4,14 @@ from sanic.response import file
 import asyncio
 from json import loads
 import logging
+from sanic_compress import Compress
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s:%(message)s')
 sio = socketio.AsyncServer(async_mode='sanic', cors_allowed_origins='*')
 app = Sanic(__name__)
+app.config['COMPRESS_LEVEL'] = 9
+app.config['COMPRESS_MIN_SIZE'] = 1
+Compress(app)
 sio.attach(app)
 
 
@@ -81,4 +85,5 @@ app.add_route(index, '/')
 app.add_route(index, '/about')
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000, )
+    app.run(host="::", port=80, )
+2

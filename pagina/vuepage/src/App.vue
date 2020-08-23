@@ -75,7 +75,7 @@
                 this.items[n1].show = !this.items[n1].show
                 this.items[n3].temperatura = n2
                 this.items[n3].ligado = !this.items[n3].ligado
-            }, 50000)
+            }, 5000)
         }
     }
 </script>
@@ -93,12 +93,13 @@
     .list-complete-enter, .list-complete-leave-to {
         opacity: 0;
         transform: scale(.01);
+        box-shadow: 0 0 0 black;
     }
 
     #app {
         transition: 1200ms linear all;
         background-color: rgba(212, 212, 212, 0.64);
-        border: #262626 solid 3px;
+
         display: flex;
         flex-wrap: wrap;
         margin: 0;
