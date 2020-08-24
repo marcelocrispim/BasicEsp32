@@ -37,7 +37,7 @@ def readChannel(lixo):
         # send3 = inicio
         # sleep_ms(1)
         client(bt1=inicio)
-        sleep_ms(1000)
+        sleep_ms(200)
 
 
 _thread.start_new_thread(readChannel, (0,))
@@ -46,4 +46,4 @@ print('Start Server')
 
 while True:
     sleep_ms(1000)
-    print(serve())
+    # print(serve())

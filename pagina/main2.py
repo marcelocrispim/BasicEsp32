@@ -1,4 +1,4 @@
-from aiofile import AIOFile
+
 import socketio
 from aiofile import AIOFile
 from aiohttp import web

@@ -12,19 +12,18 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(VueCharts);
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
-/*
+
 const options = {path: '/socket.io'}; //Options object to pass into SocketIO
 Vue.use(new VueSocketIO({
     debug: false,
     connection: SocketIO('http://localhost:8000', options),
     vuex: {
         store,
-        actionPrefix: 'SOCKET_',
         mutationPrefix: 'SOCKET_'
     },
 
 }))
-*/
+
 Vue.config.productionTip = true
 
 

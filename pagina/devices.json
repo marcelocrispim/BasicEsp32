@@ -1,0 +1,15 @@
+[
+  {
+    "id": 0,
+    "nome": "estação 01t",
+    "mac": "f0:08:d1:c8:07:7c",
+    "online": false,
+    "ligado": false,
+    "update": "2020-08-01T23:58:00.000Z",
+    "startTime": "2020-08-01T23:58:00.000Z",
+    "timeOn": "0:00:00",
+    "alarme": false,
+    "temperaturaAmbiente": 25,
+    "temperaturaMotor": 25
+  }
+]

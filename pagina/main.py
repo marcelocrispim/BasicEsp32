@@ -5,9 +5,13 @@ import asyncio
 from json import loads
 import logging
 from sanic_compress import Compress
+from aiofile import AIOFile
+from dateutil.parser import parse
+from datetime import datetime
+import extras
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s:%(message)s')
-sio = socketio.AsyncServer(async_mode='sanic', cors_allowed_origins='*')
+logging.basicConfig(level=logging.ERROR, format='%(asctime)s - %(levelname)s:%(message)s')
+sio = socketio.AsyncServer(async_mode='sanic', cors_allowed_origins='*', json=extras)
 app = Sanic(__name__)
 app.config['COMPRESS_LEVEL'] = 9
 app.config['COMPRESS_MIN_SIZE'] = 1
@@ -24,7 +28,7 @@ class EchoServerProtocol:
 
     def datagram_received(self, data, addr):
         message = data.decode()
-        print('msg ', message)
+        # print('msg ', message)
         self.q.put_nowait(message)
 
 
@@ -45,26 +49,31 @@ async def mainUdp(q):
 
 async def background_task(q):
     logging.info('Starting BackGround Task')
-    d = {
-        'id': 0,
-        'titulo': 'estação 1',
-        'cor': 'bordaVerde',
-        'show': True,
-        'tempo': '00:02',
-        'ligado': True,
-        'temperatura': 25
-    }
+    async with AIOFile("devices.json") as afp:
+        devices = loads(await afp.read())
+    [d1.update({'update': parse(d1['update']), 'startTime': parse(d1['startTime'])}) for d1 in devices]
+    logging.info('devices = ' + devices.__str__())
     while True:
         try:
             try:
                 msg = loads(await asyncio.wait_for(q.get(), timeout=5))
-                await sio.emit('event', msg['data'])
+                [d2.update({'online': True, 'update': datetime.now()}) for d2 in devices if d2['mac'] == msg['device']]
+                [d2.update({'startTime': datetime.now()}) for d2 in devices if
+                 d2['mac'] == msg['device'] and d2['ligado'] == False and msg['data']['bt1'] == True]
+
+                [d2.update({'timeOn': (datetime.now() - d2['startTime']).__str__().split('.')[0]}) for d2 in devices if
+                 d2['mac'] == msg['device'] and msg['data']['bt1'] == True]
+                [d2.update({'ligado': msg['data']['bt1']}) for d2 in devices if d2['mac'] == msg['device']]
+
             except asyncio.TimeoutError:
                 logging.error('Timeout ERROR')
 
         except Exception as e:
             logging.error('Queue error ' + e.__str__())
-            pass
+        [d3.update({'online': False}) for d3 in devices if
+         (datetime.now() - d3['update']).seconds > 10]
+
+        await sio.emit('event', devices)
 
 
 @app.listener('before_server_start')
@@ -85,5 +94,5 @@ app.add_route(index, '/')
 app.add_route(index, '/about')
 
 if __name__ == "__main__":
-    app.run(host="::", port=80, )
+    app.run(host=["::", "0.0.0.0"], port=8000, )
 2

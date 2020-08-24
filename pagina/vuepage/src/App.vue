@@ -3,13 +3,13 @@
         <transition-group name="list-complete" tag="container">
 
             <container
-                    v-for="item in filtro"
+                    v-for="item in items"
                     v-bind:key="item.id"
                     class="list-complete-item"
-                    :titulo="item.titulo"
-                    :cor="item.cor"
+                    :titulo="item.nome"
                     :ligado="item.ligado"
-                    :temperatura="item.temperatura"
+                    :tempo="item.timeOn"
+                    v-show="item.online"
             />
 
         </transition-group>
@@ -18,17 +18,16 @@
 </template>
 <script>
     import Container from "./components/Container";
-
+    import {mapState} from 'vuex'
 
     export default {
-        name: 'About',
+        name: 'app',
         components: {
-            Container
-
+            Container: Container
         },
         data() {
             return {
-                items: [
+                itemsx: [
                     {
                         'id': 0,
                         'titulo': 'estação 1',
@@ -60,22 +59,12 @@
             }
         },
         computed: {
-            filtro: function () {
 
-                return this.items.filter((item) => item.show == true)
-            }
+            ...mapState(['items'])
         }
         ,
         created() {
-            let n1, n2, n3
-            setInterval(() => {
-                n1 = Math.floor(Math.random() * 3);
-                n2 = Math.floor(Math.random() * 60);
-                n3 = Math.floor(Math.random() * 3);
-                this.items[n1].show = !this.items[n1].show
-                this.items[n3].temperatura = n2
-                this.items[n3].ligado = !this.items[n3].ligado
-            }, 5000)
+
         }
     }
 </script>
@@ -89,6 +78,7 @@
     .list-complete-leave-active {
         position: absolute;
     }
+
 
     .list-complete-enter, .list-complete-leave-to {
         opacity: 0;

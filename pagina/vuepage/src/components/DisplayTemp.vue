@@ -11,7 +11,7 @@
     export default {
         name: "DisplayTemp",
         props: {
-            valor: {type: String, default: '00:00:00'}
+            valor: {type: Number, default: 25}
         },
         data() {
             return {
