@@ -1,49 +1,21 @@
-"""
-    this main script
+try:
+    import uasyncio
+except:
+    import upip
 
-"""
-import _thread
-from extras import UdpServer, UdpClient
-from utime import sleep_ms, time
-from machine import ADC, Pin
-
-inicio = False
-startTime = time()
+    upip.install('uasyncio')
+    import uasyncio
+from urandom import randint
 
 
-def evento():
-    global inicio
-    inicio = not inicio
-
-
-bt1 = Pin(0, Pin.IN)
-bt1.irq(handler=lambda e: evento(), trigger=Pin.IRQ_FALLING)
-
-
-def readChannel(lixo):
-    # ad1 = ADC(Pin(32))
-    # ad1.atten(ADC.ATTN_11DB)
-    # ad1.width(ADC.WIDTH_9BIT)
-    # ad2 = ADC(Pin(34))
-    # ad2.atten(ADC.ATTN_11DB)
-    # ad2.width(ADC.WIDTH_9BIT)
-    global inicio
-    client = UdpClient(host='192.168.30.43')
+async def main(numero, tempo):
+    print('entrou = ', numero)
     while True:
-        # send1 = ad1.read()
-        # sleep_ms(1)
-        # send2 = ad2.read()
-        # sleep_ms(1)
-        # send3 = inicio
-        # sleep_ms(1)
-        client(bt1=inicio)
-        sleep_ms(200)
+        print('entrou = ', numero, 'tempo = ', tempo)
+        await uasyncio.sleep(tempo)
 
 
-_thread.start_new_thread(readChannel, (0,))
-serve = UdpServer()
-print('Start Server')
-
-while True:
-    sleep_ms(1000)
-    # print(serve())
+loop = uasyncio.get_event_loop()
+for x in range(5):
+    loop.create_task(main(x, randint(4, 10)))
+loop.run_forever()

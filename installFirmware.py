@@ -7,8 +7,10 @@ import tempfile
 import os
 import wget
 
-linkFirmware = 'http://micropython.org/resources/firmware/esp32-idf3-20200725-unstable-v1.12-657-g37e1b5c89.bin'
-serialPort = 'COM3'
+from serial.tools.list_ports import comports
+
+linkFirmware = 'http://micropython.org/resources/firmware/esp32-idf3-20191220-v1.12.bin'
+serialPort = [port.device for port in comports() if port.vid == 4292 and port.pid == 60000][0] or 'COM3'
 
 temp = tempfile.gettempdir()
 print(wget.download(url=linkFirmware,

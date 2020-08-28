@@ -1,6 +1,6 @@
 [
   {
-    "rede": "teste",
+    "rede": "Lab",
     "senha": "realtime"
   },
   {
@@ -8,7 +8,7 @@
     "senha": "Tapajos917"
   },
   {
-    "rede": "Lab",
+    "rede": "teste",
     "senha": "realtime"
   }
 ]
